@@ -1,4 +1,4 @@
-import RegisterForm from "../../HOC/WithRegisterFormik";
+import RegisterForm from "../../form/HOC/WithRegisterFormik";
 
 const RegisterPage = () => {
    return (

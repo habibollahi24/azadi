@@ -3,7 +3,7 @@ module.exports = {
    content: [
       "./pages/**/*.{js,ts,jsx,tsx}",
       "./components/**/*.{js,ts,jsx,tsx}",
-      "./HOC/**/*.{js,ts,jsx,tsx}",
+      "./form/**/*.{js,ts,jsx,tsx}",
    ],
    theme: {
       extend: {},

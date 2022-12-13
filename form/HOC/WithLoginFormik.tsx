@@ -1,29 +1,24 @@
 import { withFormik } from "formik";
-import TemplateRegisterForm from "../components/TemplateRegisterForm";
 import * as Yup from "yup";
+import TemplateLoginForm from "../components/TemplateLoginForm";
 
-interface RegisterFormValues {
-   name: string;
+interface LoginFormValues {
    email: string;
    password: string;
 }
 
-interface RegisterFormProps {
+interface LoginFormProps {
    //add props
 }
 
-const RegisterForm = withFormik<RegisterFormProps, RegisterFormValues>({
+const LoginForm = withFormik<LoginFormProps, LoginFormValues>({
    mapPropsToValues: () => {
       return {
-         name: "",
          email: "",
          password: "",
       };
    },
    validationSchema: Yup.object({
-      name: Yup.string()
-         .min(2, "Must be 2 characters or less")
-         .required("Required"),
       email: Yup.string().email("Invalid email address").required("Required"),
       password: Yup.string()
          .required("No password provided.")
@@ -35,6 +30,6 @@ const RegisterForm = withFormik<RegisterFormProps, RegisterFormValues>({
       console.log(values);
       actions.setSubmitting(false);
    },
-})(TemplateRegisterForm);
+})(TemplateLoginForm);
 
-export default RegisterForm;
+export default LoginForm;
