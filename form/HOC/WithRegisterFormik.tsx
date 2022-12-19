@@ -1,6 +1,9 @@
 import { withFormik } from "formik";
 import TemplateRegisterForm from "../../form/components/TemplateRegisterForm";
 import * as Yup from "yup";
+import callApi from "./../../api/callApi";
+import Router from "next/router";
+import { ValidationsErrorFields } from "./../../utils/validationErrors";
 
 interface RegisterFormValues {
    name: string;
@@ -27,13 +30,22 @@ const RegisterForm = withFormik<RegisterFormProps, RegisterFormValues>({
       email: Yup.string().email("Invalid email address").required("Required"),
       password: Yup.string()
          .required("No password provided.")
-         .min(8, "Password is too short - should be 8 chars minimum.")
-         .matches(/[a-zA-Z]/, "Password can only contain Latin letters."),
+         .min(8, "Password is too short - should be 8 chars minimum."),
+      // .matches(/[a-zA-Z]/, "Password can only contain Latin letters."),
    }),
 
-   handleSubmit: (values, actions) => {
-      console.log(values);
-      actions.setSubmitting(false);
+   handleSubmit: async (values, { setFieldError }) => {
+      try {
+         const response = await callApi().post("/auth/register", values);
+
+         if (response.status === 201) Router.push("/auth/login");
+      } catch (error) {
+         if (error instanceof ValidationsErrorFields) {
+            Object.entries(error.messages).forEach((key) =>
+               setFieldError(key[0], key[1] as string)
+            );
+         }
+      }
    },
 })(TemplateRegisterForm);
 

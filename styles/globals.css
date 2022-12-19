@@ -19,7 +19,7 @@
       @apply bg-orange-400 text-white;
    }
    .error-msg {
-      @apply text-red-500 text-sm;
+      @apply text-red-500 text-sm font-semibold;
    }
 }
 
@@ -39,6 +39,11 @@ a {
 * {
    box-sizing: border-box;
 }
+
+/* li > a:hover::after, li > a.active-nav::after {
+   width: 100%;
+   background: blue;
+ } */
 
 /* @media (prefers-color-scheme: dark) {
   html {

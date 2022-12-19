@@ -1,4 +1,5 @@
 import axios from "axios"
+import { ValidationsErrorFields } from './../utils/validationErrors';
 
 
 const callApi = () => {
@@ -12,11 +13,15 @@ const callApi = () => {
  )
 
  axiosInstance.interceptors.response.use(
-  (res) => {
-   //manage validations
-   return res
-  },
-  err => Promise.reject(err)
+  (res) => res
+  ,
+  err => {
+   //handle all 422 errors
+   if (err.response.status === 422) {
+    throw new ValidationsErrorFields(err.response.data.errors)
+   }
+   return Promise.reject(err)
+  }
  )
 
  return axiosInstance

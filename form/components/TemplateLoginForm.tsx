@@ -20,7 +20,7 @@ const TemplateLoginForm = (props: FormikProps<RegisterFormValues>) => {
 
          <Button
             type="submit"
-            disabled={!(props.isValid && props.dirty)}
+            // disabled={!(props.isValid && props.dirty)}
             className="btn-primary !mt-5"
          >
             Login
